@@ -30,7 +30,6 @@ namespace CTS.API.AdminAPP.Controllers
         {
 
             DataSet ds = new DataSet();
-
             DataTable dt = null;
             try
             {

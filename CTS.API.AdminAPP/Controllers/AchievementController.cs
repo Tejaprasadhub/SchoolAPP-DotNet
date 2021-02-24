@@ -13,6 +13,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class AchievementController : ControllerBase
     {
         private readonly IConfiguration _config;
