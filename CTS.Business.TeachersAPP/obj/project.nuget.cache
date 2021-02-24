@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "UgeTjxuZdbJJTfnahxCZbL1RiXmUiH0NEBvON4FjukXpdok8MhwD2NtAA6iHR1EuEB1jk3DUSDu/bW0jdCifQg==",
+  "success": true,
+  "projectFilePath": "H:\\CTSJProject-Net-API\\CTS.Business.TeachersAPP\\CTS.Business.TeachersAPP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
