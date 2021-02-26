@@ -66,7 +66,7 @@ namespace CTS.API.AdminAPP
             var info = new OpenApiInfo()
             {
                 Version = "v1",
-                Title = "Swagger Demo API",
+                Title = "School API API",
                 Description = "Swagger Demo API Description",
                 TermsOfService = new Uri("http://www.example.com"),
                 Contact = contact,

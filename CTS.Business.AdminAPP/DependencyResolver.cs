@@ -16,6 +16,9 @@ namespace CTS.Business.AdminAPP
     {
         public static void ConfigureAdminAPPServices(this IServiceCollection services)
         {
+            services.AddScoped<IAccessTokenManager, AccessTokenManager>();
+            services.AddScoped<IAccessTokenRepository, AccessTokenRepository>();
+
             services.AddScoped<IBrnachesManager,BranchesManager>();
             services.AddScoped<IBranchesRepository,BranchesRepository>();
 
