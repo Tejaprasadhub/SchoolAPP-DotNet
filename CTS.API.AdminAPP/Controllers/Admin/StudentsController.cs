@@ -17,13 +17,14 @@ namespace CTS.API.AdminAPP.Controllers
     [Route("api/[controller]")]
     public class StudentsController : ApiController
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly IStudentsManager _studentssManager;
-        public StudentsController(IConfiguration config, IStudentsManager studentsManager)
+        public StudentsController(IConfiguration config, IStudentsManager studentsManager, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _studentssManager = studentsManager;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("GetStudents")]
@@ -151,7 +152,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 dt = _studentssManager.GetExamWiseSubjectMarks(data);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 List<ExamReportsData> dataList = utility.CostructReportsData(dt);
 

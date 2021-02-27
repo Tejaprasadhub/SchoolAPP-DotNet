@@ -4,6 +4,7 @@ using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
 using CTS.Model;
 using CTS.Model.Exams;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,13 @@ namespace CTS.DataAccess.AdminAPP
 {
     public class ExamsRepository : CTSRepositoryBase, IExamsRepository
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<ExamsRepository> _logger;
-        public ExamsRepository(CTSContext db, ILogger<ExamsRepository> logger)
+        public ExamsRepository(CTSContext db, ILogger<ExamsRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetExams(GridParameters pagingParameters)
@@ -28,7 +30,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
@@ -49,7 +51,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {
@@ -82,7 +84,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {
@@ -111,7 +113,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {

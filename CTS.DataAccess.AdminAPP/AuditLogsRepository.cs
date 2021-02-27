@@ -3,6 +3,7 @@ using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,13 @@ namespace CTS.DataAccess.AdminAPP
 {
    public class AuditLogsRepository : CTSRepositoryBase, IAuditLogsRepository
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<AuditLogsRepository> _logger;
-        public AuditLogsRepository(CTSContext db, ILogger<AuditLogsRepository> logger)
+        public AuditLogsRepository(CTSContext db, ILogger<AuditLogsRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetAuditLogs()
@@ -27,7 +29,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 ds = _db.Execute("GetAuditLogTables", CommandType.StoredProcedure, null, utility.GetDatabasename(utility.GetSubdomain()));
 
@@ -44,7 +46,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {

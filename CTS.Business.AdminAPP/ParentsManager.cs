@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,14 @@ namespace CTS.Business.AdminAPP
 {
     class ParentsManager : IParentsManager
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly IParentsRepository _parentsRepository;
-        public ParentsManager(IConfiguration config, IParentsRepository parentsRepository)
+        public ParentsManager(IConfiguration config, IParentsRepository parentsRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _parentsRepository = parentsRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
         public async Task<Dictionary<string, dynamic>> GetParents(GridParameters pagingParameters)
         {
@@ -32,7 +34,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _parentsRepository.GetParents(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

@@ -2,6 +2,7 @@
 using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace CTS.DataAccess.AdminAPP
 {
     public class DropdownRepository : CTSRepositoryBase, IDropdownRepository
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<DropdownRepository> _logger;
-        public DropdownRepository(CTSContext db, ILogger<DropdownRepository> logger)
+        public DropdownRepository(CTSContext db, ILogger<DropdownRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetDropdowns(string spName)
@@ -25,7 +28,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
@@ -48,7 +51,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {

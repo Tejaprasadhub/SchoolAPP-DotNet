@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,14 @@ namespace CTS.Business.AdminAPP
 {
     public class StatisticsManager : IStatisticsManager
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly IStatisticsRepository _StatisticsRepository;
-        public StatisticsManager(IConfiguration config, IStatisticsRepository StatisticsRepository)
+        public StatisticsManager(IConfiguration config, IStatisticsRepository StatisticsRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _StatisticsRepository = StatisticsRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Dictionary<string, dynamic>> GetStatistics(GridParameters pagingParameters)
@@ -33,7 +35,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _StatisticsRepository.GetStatistics();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace CTS.Business.AdminAPP
     {
         private readonly IConfiguration _config;
         private readonly ITimetableRepository _timeTableRepository;
-        public TimeTableManager(IConfiguration config, ITimetableRepository timeTableRepository)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public TimeTableManager(IConfiguration config, ITimetableRepository timeTableRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _timeTableRepository = timeTableRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Dictionary<string, dynamic>> GetTimetable(GridParameters pagingParameters)
@@ -32,7 +35,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet =  _timeTableRepository.GetTimetable(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

@@ -4,6 +4,7 @@ using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
 using CTS.Model;
 using CTS.Model.Students;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,13 @@ namespace CTS.DataAccess.AdminAPP
 {
    public class StudentsRepository : CTSRepositoryBase, IStudentsRepository
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<StudentsRepository> _logger;
-        public StudentsRepository(CTSContext db, ILogger<StudentsRepository> logger)
+        public StudentsRepository(CTSContext db, ILogger<StudentsRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetStudents(GridParameters pagingParameters)
@@ -28,7 +30,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
@@ -49,7 +51,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {
@@ -111,7 +113,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
@@ -135,7 +137,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
@@ -162,7 +164,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
@@ -188,7 +190,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
@@ -212,7 +214,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {

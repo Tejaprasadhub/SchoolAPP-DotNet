@@ -2,6 +2,7 @@
 using CTS.Core.DataAccess;
 using CTS.DataAccess.Core;
 using CTS.DataAccess.Security.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace CTS.DataAccess.Security
 {
     public class AccessTokenRepository : CTSRepositoryBase ,IAccessTokenRepository
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<AccessTokenRepository> _logger;
-        public AccessTokenRepository(CTSContext db, ILogger<AccessTokenRepository> logger)
+        public AccessTokenRepository(CTSContext db, ILogger<AccessTokenRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetSchoolUserDetailsBasedOnSubdomain()
@@ -44,7 +47,7 @@ namespace CTS.DataAccess.Security
             try
             {
                 DataSet ds = new DataSet();
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@userName",login.UserName },

@@ -3,6 +3,7 @@ using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
 using CTS.Model.Exams;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,14 @@ namespace CTS.Business.AdminAPP
 {
     public class ExamsManager : IExamsManager
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly IExamsRepository _examsRepository;
-        public ExamsManager(IConfiguration config, IExamsRepository examsRepository)
+        public ExamsManager(IConfiguration config, IExamsRepository examsRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _examsRepository = examsRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Dictionary<string, dynamic>> GetExams(GridParameters pagingParameters)
@@ -34,7 +36,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _examsRepository.GetExams(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters, "GetExams");
 

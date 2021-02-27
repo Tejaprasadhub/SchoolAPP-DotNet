@@ -2,6 +2,7 @@
 using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace CTS.DataAccess.AdminAPP
 {
    public class SettingsRepository : CTSRepositoryBase, ISettingsRepository
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<SettingsRepository> _logger;
-        public SettingsRepository(CTSContext db, ILogger<SettingsRepository> logger)
+        public SettingsRepository(CTSContext db, ILogger<SettingsRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetSettings()
@@ -25,7 +28,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 ds = _db.Execute("GetSettings", CommandType.StoredProcedure, null, utility.GetDatabasename(utility.GetSubdomain()));
 

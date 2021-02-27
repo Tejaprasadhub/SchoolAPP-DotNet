@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace CTS.Business.AdminAPP
 {
     public class SubjectsManager : ISubjectsManager
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly ISubjectsRepository _subjectsRepository;
-        public SubjectsManager(IConfiguration config, ISubjectsRepository subjectsRepository)
+        public SubjectsManager(IConfiguration config, ISubjectsRepository subjectsRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _subjectsRepository = subjectsRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
         public async Task<Dictionary<string, dynamic>> GetSubjects(GridParameters pagingParameters)
         {
@@ -31,7 +34,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _subjectsRepository.GetSubjects(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

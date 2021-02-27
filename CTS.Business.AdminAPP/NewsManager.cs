@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,14 @@ namespace CTS.Business.AdminAPP
 {
     public class NewsManager : INewsManager
     {
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly INewsRepository _newsRepository;
-        public NewsManager(IConfiguration config, INewsRepository newsRepository)
+        public NewsManager(IConfiguration config, INewsRepository newsRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _newsRepository = newsRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Dictionary<string, dynamic>> GetNews(GridParameters pagingParameters)
@@ -32,7 +34,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _newsRepository.GetNews(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

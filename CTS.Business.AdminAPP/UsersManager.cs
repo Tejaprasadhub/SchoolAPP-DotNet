@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace CTS.Business.AdminAPP
 {
    public class UsersManager : IUsersManager
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly IUsersRepository _usersRepository;
-        public UsersManager(IConfiguration config, IUsersRepository usersRepository)
+        public UsersManager(IConfiguration config, IUsersRepository usersRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _usersRepository = usersRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Dictionary<string, dynamic>> GetUsers(GridParameters pagingParameters)
@@ -32,7 +35,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _usersRepository.GetUsers(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

@@ -3,6 +3,7 @@ using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace CTS.DataAccess.AdminAPP
 {
    public class RoleAccessRepository : CTSRepositoryBase, IRoleAccessRepository
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<RoleAccessRepository> _logger;
-        public RoleAccessRepository(CTSContext db, ILogger<RoleAccessRepository> logger)
+        public RoleAccessRepository(CTSContext db, ILogger<RoleAccessRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetRoleAccess()
@@ -26,7 +29,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 ds = _db.Execute("GetRoleAccess", CommandType.StoredProcedure, null, utility.GetDatabasename(utility.GetSubdomain()));
 
@@ -42,7 +45,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {
@@ -68,7 +71,7 @@ namespace CTS.DataAccess.AdminAPP
             try
             {
                 DataSet ds = new DataSet();
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@userid",userid },
@@ -88,7 +91,7 @@ namespace CTS.DataAccess.AdminAPP
             try
             {
                 DataSet ds = new DataSet();
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@subdomain",utility.GetSubdomain() }

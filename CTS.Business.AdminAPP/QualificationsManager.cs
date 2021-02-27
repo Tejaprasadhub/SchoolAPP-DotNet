@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace CTS.Business.AdminAPP
 {
    public class QualificationsManager :IQualificationsManager
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
         private readonly IQualificationsRepository _qualificationsRepository;
-        public QualificationsManager(IConfiguration config, IQualificationsRepository qualificationsRepository)
+        public QualificationsManager(IConfiguration config, IQualificationsRepository qualificationsRepository, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _qualificationsRepository = qualificationsRepository;
+            this._httpContextAccessor = httpContextAccessor;
         }
         public async Task<Dictionary<string, dynamic>> GetQualifications(GridParameters pagingParameters)
         {
@@ -31,7 +34,7 @@ namespace CTS.Business.AdminAPP
 
                 gridDataSet = _qualificationsRepository.GetQualifications(pagingParameters);
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
 

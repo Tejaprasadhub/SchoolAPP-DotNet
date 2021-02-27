@@ -20,21 +20,15 @@ namespace CTS.Common
 {
     public class Utility : CTSRepositoryBase
     {
-        //public Utility(CTSContext db)
-        //{
-        //    this._db = db;
-        //}
 
-        
-
-       
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public Utility(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         public  string GetSubdomain()
         {
-            //var data = GetSubDomain();
-            //var data = _config.HttpContext.Request.Path;
-
-
+            //return _httpContextAccessor.HttpContext.Request.Host.Value;
             return "private";
         }       
 

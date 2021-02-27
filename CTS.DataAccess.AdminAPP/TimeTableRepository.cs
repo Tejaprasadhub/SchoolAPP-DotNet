@@ -3,6 +3,7 @@ using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
 using CTS.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace CTS.DataAccess.AdminAPP
 {
     public class TimeTableRepository : CTSRepositoryBase, ITimetableRepository
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<TimeTableRepository> _logger;
-        public TimeTableRepository(CTSContext db, ILogger<TimeTableRepository> logger)
+        public TimeTableRepository(CTSContext db, ILogger<TimeTableRepository> logger, IHttpContextAccessor httpContextAccessor)
         {
             this._db = db;
             this._logger = logger;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public DataSet GetTimetable(GridParameters pagingParameters)
@@ -26,7 +29,7 @@ namespace CTS.DataAccess.AdminAPP
             {
                 DataSet ds = new DataSet();
 
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
@@ -47,7 +50,7 @@ namespace CTS.DataAccess.AdminAPP
         {
             try
             {
-                Utility utility = new Utility();
+                Utility utility = new Utility(_httpContextAccessor);
 
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {
