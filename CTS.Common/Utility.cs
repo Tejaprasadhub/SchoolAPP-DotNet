@@ -2,6 +2,7 @@
 using CTS.DataAccess.Core;
 using CTS.Model;
 using CTS.Model.Branches;
+using CTS.Model.Events;
 using CTS.Model.Exams;
 using CTS.Model.Teachers;
 using Microsoft.AspNetCore.Http;
@@ -97,6 +98,22 @@ namespace CTS.Common
             else if (paginationName == "GetExams")
             {
                 List<Exams> constructedList = CostructExamsGridLevelData(tableToBeConstructed);
+
+                ListtoDataTableConverter converter = new ListtoDataTableConverter();
+
+                finalDT = converter.ToDataTable(constructedList);
+
+                if (finalDT != null && finalDT.Rows.Count > 0)
+                {
+                    finalDT = finalDT.AsEnumerable().GroupBy(r => new { id = r["id"] }).Select(g => g.OrderBy(r => r["id"]).First()).CopyToDataTable();
+                }
+
+                dv = finalDT.DefaultView;
+            }
+            
+            else if (paginationName == "GetEvents")
+            {
+                List<Events> constructedList = CostructEventsGridLevelData(tableToBeConstructed);
 
                 ListtoDataTableConverter converter = new ListtoDataTableConverter();
 
@@ -215,6 +232,20 @@ namespace CTS.Common
                             cutoff = cl["cutoff"].ToString(),
                             total = cl["total"].ToString(),
                         }).ToList())
+                    }).ToList();
+        }
+        
+        //Constructiong Events Grid Level Data
+        public static List<Events> CostructEventsGridLevelData(DataTable dataTable)
+        {
+            return (from rw in dataTable.AsEnumerable()
+                    select new Events()
+                    {
+                        id = Convert.ToString(rw["id"]),
+                        title = Convert.ToString(rw["name"]),
+                        start = Convert.ToDateTime(rw["startdate"]),
+                        end = Convert.ToDateTime(rw["enddate"]),
+                        url = Convert.ToString(rw["url"])
                     }).ToList();
         }
 

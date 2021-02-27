@@ -57,6 +57,9 @@ namespace CTS.DataAccess.AdminAPP
                     {"@description",dataObj.description },
                     {"@image",dataObj.image },
                     {"@accept_registrations",dataObj.accept_registrations },
+                    {"@startdate",dataObj.startdate },
+                    {"@enddate",dataObj.enddate },
+                    {"@url",dataObj.url },
                     {"@userid",userid },
                     {"@querytype",dataObj.querytype }
                 };
