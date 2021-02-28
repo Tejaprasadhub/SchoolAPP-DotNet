@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
 using CTS.Model;
+using CTS.Model.Events;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -25,24 +26,20 @@ namespace CTS.API.AdminAPP.Controllers
         }
 
         [HttpPost("GetEvents")]
-        public async Task<ActionResult> GetEvents([FromBody] GridParameters pagingParameters)
+        public async Task<ActionResult> GetEvents([FromBody] Events reqObj)
         {
-
             DataSet ds = new DataSet();
 
-            DataTable dt = null;
+            Dictionary<string, dynamic> returnObj = new Dictionary<string, dynamic>();
+
             try
             {
-                var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _eventsManager.GetEvents(pagingParameters);
+                 ds =  _eventsManager.GetEvents(reqObj);
 
-                dt = apiResult["data"];
+                //returnObj.Add("data", ds.Tables[0]);
 
-                count = Convert.ToInt32(apiResult["count"]);
-
-
-                return Ok(new { success = true, data = dt, Total = count });
+                return Ok(new { success = true,  data=ds.Tables[0] });
 
             }
             catch (Exception ex)

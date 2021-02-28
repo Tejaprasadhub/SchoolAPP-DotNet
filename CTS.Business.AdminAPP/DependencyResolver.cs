@@ -34,6 +34,9 @@ namespace CTS.Business.AdminAPP
             services.AddScoped<IExamsManager, ExamsManager>();
             services.AddScoped<IExamsRepository, ExamsRepository>();
 
+            services.AddScoped<IEventsManager, EventsManager>();
+            services.AddScoped<IEventsRepository, EventsRepository>();
+
             services.AddScoped<IClassesManager, ClassesManager>();
             services.AddScoped<IClassesRepository, ClassesRepository>();
 

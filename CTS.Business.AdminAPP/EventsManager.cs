@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using CTS.Model.Events;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -24,20 +25,15 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetEvents(GridParameters pagingParameters)
+        public  DataSet GetEvents(Events reqObj)
         {
 
             DataSet gridDataSet = null;
 
-            Dictionary<string, dynamic> returnObj = new Dictionary<string, dynamic>();
             try
             {
 
-                gridDataSet = _eventsRepository.GetEvents();
-
-                Utility utility = new Utility(_httpContextAccessor);
-
-                returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
+                gridDataSet = _eventsRepository.GetEvents(reqObj);                
 
             }
             catch (Exception ex)
@@ -45,7 +41,7 @@ namespace CTS.Business.AdminAPP
                 throw ex;
             }
 
-            return returnObj;
+            return gridDataSet;
         }
 
         public bool AEDEvents(CrudModel dataObj, int userid)

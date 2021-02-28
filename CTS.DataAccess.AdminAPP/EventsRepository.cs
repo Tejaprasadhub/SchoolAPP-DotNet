@@ -3,6 +3,7 @@ using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
 using CTS.Model;
+using CTS.Model.Events;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,15 +25,22 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetEvents()
+        public DataSet GetEvents(Events reqObj)
         {
             try
             {
                 DataSet ds = new DataSet();
 
                 Utility utility = new Utility(_httpContextAccessor);
+                Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
+                {
+                    {"@startdate",reqObj.start },
+                    {"@enddate",reqObj.end },
+                    {"@queryType",reqObj.queryType },
+                    {"@idValue",reqObj.idValue }
+                };
 
-                ds = _db.Execute("GetEvents", CommandType.StoredProcedure, null, utility.GetDatabasename(utility.GetSubdomain()));
+                ds = _db.Execute("GetEvents", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
 
                 return ds;
             }

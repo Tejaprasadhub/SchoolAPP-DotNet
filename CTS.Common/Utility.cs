@@ -109,23 +109,8 @@ namespace CTS.Common
                 }
 
                 dv = finalDT.DefaultView;
-            }
-            
-            else if (paginationName == "GetEvents")
-            {
-                List<Events> constructedList = CostructEventsGridLevelData(tableToBeConstructed);
-
-                ListtoDataTableConverter converter = new ListtoDataTableConverter();
-
-                finalDT = converter.ToDataTable(constructedList);
-
-                if (finalDT != null && finalDT.Rows.Count > 0)
-                {
-                    finalDT = finalDT.AsEnumerable().GroupBy(r => new { id = r["id"] }).Select(g => g.OrderBy(r => r["id"]).First()).CopyToDataTable();
-                }
-
-                dv = finalDT.DefaultView;
-            }
+            }            
+           
 
             DataColumn finalDTColumn = new DataColumn("RecordIndex");
             finalDTColumn.DataType = System.Type.GetType("System.Int32");
@@ -233,21 +218,8 @@ namespace CTS.Common
                             total = cl["total"].ToString(),
                         }).ToList())
                     }).ToList();
-        }
+        }        
         
-        //Constructiong Events Grid Level Data
-        public static List<Events> CostructEventsGridLevelData(DataTable dataTable)
-        {
-            return (from rw in dataTable.AsEnumerable()
-                    select new Events()
-                    {
-                        id = Convert.ToString(rw["id"]),
-                        title = Convert.ToString(rw["name"]),
-                        start = Convert.ToDateTime(rw["startdate"]),
-                        end = Convert.ToDateTime(rw["enddate"]),
-                        url = Convert.ToString(rw["url"])
-                    }).ToList();
-        }
 
         //Constructing Reports Data
         public  List<ExamReportsData> CostructReportsData(DataTable dataTable)
