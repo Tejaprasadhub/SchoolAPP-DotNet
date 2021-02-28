@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
 using CTS.Model;
+using CTS.Model.DashBoard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -25,24 +26,16 @@ namespace CTS.API.AdminAPP.Controllers
         }
 
         [HttpPost("GetDashboard")]
-        public async Task<ActionResult> GetDashboard([FromBody] GridParameters pagingParameters)
+        public async Task<ActionResult> GetDashboard([FromBody] DashBoard reqObj)
         {
 
             DataSet ds = new DataSet();
 
-            DataTable dt = null;
             try
             {
-                var count = 0;
+                ds =  _dashboardManager.GetDashboard(reqObj);
 
-                Dictionary<string, dynamic> apiResult = await _dashboardManager.GetDashboard(pagingParameters);
-
-                dt = apiResult["data"];
-
-                count = Convert.ToInt32(apiResult["count"]);
-
-
-                return Ok(new { success = true, data = dt, Total = count });
+                return Ok(new { success = true, data = ds.Tables[0] });
 
             }
             catch (Exception ex)

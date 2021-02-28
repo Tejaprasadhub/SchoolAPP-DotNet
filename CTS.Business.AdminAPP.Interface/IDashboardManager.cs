@@ -1,14 +1,11 @@
-﻿using CTS.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CTS.Model.DashBoard;
+using System.Data;
 
 
 namespace CTS.Business.AdminAPP.Interface
 {
     public interface IDashboardManager
     {
-        Task<Dictionary<string, dynamic>> GetDashboard(GridParameters pagingParameters);
+        DataSet GetDashboard(DashBoard reqObj);
     }
 }

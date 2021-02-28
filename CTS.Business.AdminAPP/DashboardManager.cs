@@ -2,6 +2,7 @@
 using CTS.Common;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.Model;
+using CTS.Model.DashBoard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -24,20 +25,12 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetDashboard(GridParameters pagingParameters)
+        public DataSet GetDashboard(DashBoard reqObj)
         {
-
             DataSet gridDataSet = null;
-
-            Dictionary<string, dynamic> returnObj = new Dictionary<string, dynamic>();
             try
             {
-
-                gridDataSet = _dashboardRepository.GetDashboard();
-
-                Utility utility = new Utility(_httpContextAccessor);
-
-                returnObj = utility.ApplyPaging(gridDataSet, pagingParameters);
+                gridDataSet = _dashboardRepository.GetDashboard(reqObj);
 
             }
             catch (Exception ex)
@@ -45,7 +38,8 @@ namespace CTS.Business.AdminAPP
                 throw ex;
             }
 
-            return returnObj;
+            return gridDataSet;
+           
         }
     }
 }

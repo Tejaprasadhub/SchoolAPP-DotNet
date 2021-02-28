@@ -70,6 +70,9 @@ namespace CTS.Business.AdminAPP
 
             services.AddScoped<IRoleAccessManager, RoleAccessManager>();
             services.AddScoped<IRoleAccessRepository, RoleAccessRepository>();
+
+            services.AddScoped<IDashboardManager, DashboardManager>();
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
         }
     }
 }

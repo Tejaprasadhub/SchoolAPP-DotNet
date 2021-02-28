@@ -2,6 +2,7 @@
 using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
+using CTS.Model.DashBoard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,15 +22,21 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetDashboard()
+        public DataSet GetDashboard(DashBoard reqObj)
         {
             try
             {
                 DataSet ds = new DataSet();
+                Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
+                {
+                    {"@startdate",reqObj.start },
+                    {"@enddate",reqObj.end },
+                    {"@chartType",reqObj.ChartType }
+                };
 
                 Utility utility = new Utility(_httpContextAccessor);
 
-                ds = _db.Execute("GetDashboard", CommandType.StoredProcedure, null, utility.GetDatabasename(utility.GetSubdomain()));
+                ds = _db.Execute("GetDashboard", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
 
                 return ds;
             }
