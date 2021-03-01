@@ -9,8 +9,8 @@ namespace CTS.Model.Events
     {
         public string start { get; set; }
         public string end { get; set; }
-        public string queryType { get; set; }
-        public string idValue { get; set; }
+        public string querytype { get; set; }
+        public string id { get; set; }
 
     }
 

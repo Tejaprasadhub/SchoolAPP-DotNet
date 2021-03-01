@@ -36,8 +36,8 @@ namespace CTS.DataAccess.AdminAPP
                 {
                     {"@startdate",reqObj.start },
                     {"@enddate",reqObj.end },
-                    {"@queryType",reqObj.queryType },
-                    {"@idValue",reqObj.idValue }
+                    {"@queryType",reqObj.querytype },
+                    {"@idValue",reqObj.id }
                 };
 
                 ds = _db.Execute("GetEvents", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
@@ -64,12 +64,13 @@ namespace CTS.DataAccess.AdminAPP
                     {"@category",dataObj.category },
                     {"@description",dataObj.description },
                     {"@image",dataObj.image },
-                    {"@accept_registrations",dataObj.accept_registrations },
-                    {"@startdate",dataObj.startdate },
-                    {"@enddate",dataObj.enddate },
+                    {"@accept_registrations",dataObj.register },
+                    {"@startdate",dataObj.start },
+                    {"@enddate",dataObj.end },
                     {"@url",dataObj.url },
                     {"@userid",userid },
-                    {"@querytype",dataObj.querytype }
+                    {"@querytype",dataObj.querytype },
+                    {"@status",dataObj.status } 
                 };
 
                 _db.Execute("AEDEvents", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));

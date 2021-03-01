@@ -24,12 +24,12 @@ namespace CTS.Model
         public int teacherid { get; set; }
         public DateTime periodfrom { get; set; }
         public DateTime periodto { get; set; }
-        public DateTime startdate { get; set; }
-        public DateTime enddate { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
         public string image { get; set; }
         public string url { get; set; }
         public string category { get; set; }
-        public string accept_registrations { get; set; }
+        public string register { get; set; }
         public int querytype { get; set; }
 
 
