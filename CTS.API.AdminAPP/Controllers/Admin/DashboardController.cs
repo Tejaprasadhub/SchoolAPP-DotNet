@@ -35,7 +35,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 ds =  _dashboardManager.GetDashboard(reqObj);
 
-                return Ok(new { success = true, data = ds.Tables[0] });
+                return Ok(new { success = true, data = ds });
 
             }
             catch (Exception ex)
