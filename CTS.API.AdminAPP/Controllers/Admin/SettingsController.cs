@@ -50,5 +50,23 @@ namespace CTS.API.AdminAPP.Controllers
                 throw;
             }
         }
+
+        [HttpPost("AEDSettings")]
+        public async Task<ActionResult> AEDSettings([FromBody] CrudModel dataObj)
+        {
+            //var userProfile = GetUserProfile();
+            try
+            {
+                bool status = _settingsManager.AEDSettings(dataObj, 1);
+
+
+                return Ok(new { success = status });
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

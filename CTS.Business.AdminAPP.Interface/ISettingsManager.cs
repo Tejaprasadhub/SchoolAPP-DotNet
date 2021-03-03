@@ -8,5 +8,7 @@ namespace CTS.Business.AdminAPP.Interface
     public interface ISettingsManager
     {
         Task<Dictionary<string, dynamic>> GetSettings(GridParameters pagingParameters);
+
+        bool AEDSettings(CrudModel input, int userid);
     }
 }

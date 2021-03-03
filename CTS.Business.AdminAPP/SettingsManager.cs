@@ -47,5 +47,21 @@ namespace CTS.Business.AdminAPP
 
             return returnObj;
         }
+
+        public bool AEDSettings(CrudModel dataObj, int userid)
+        {
+            bool status = false;
+            try
+            {
+                status = _settingsRepository.AEDSettings(dataObj, userid);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return status;
+        }
+
     }
 }
