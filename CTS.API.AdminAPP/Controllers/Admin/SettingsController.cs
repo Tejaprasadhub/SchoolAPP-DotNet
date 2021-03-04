@@ -52,7 +52,7 @@ namespace CTS.API.AdminAPP.Controllers
         }
 
         [HttpPost("AEDSettings")]
-        public async Task<ActionResult> AEDSettings([FromBody] CrudModel dataObj)
+        public async Task<ActionResult> AEDSettings([FromBody] SettingsModel dataObj)
         {
             //var userProfile = GetUserProfile();
             try

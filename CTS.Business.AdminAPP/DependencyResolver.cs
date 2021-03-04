@@ -73,6 +73,9 @@ namespace CTS.Business.AdminAPP
 
             services.AddScoped<IDashboardManager, DashboardManager>();
             services.AddScoped<IDashboardRepository, DashboardRepository>();
+
+            services.AddScoped<ISettingsManager, SettingsManager>();
+            services.AddScoped<ISettingsRepository, SettingsRepository>();
         }
     }
 }

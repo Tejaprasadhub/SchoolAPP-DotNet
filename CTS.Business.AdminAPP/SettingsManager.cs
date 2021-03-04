@@ -48,7 +48,7 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDSettings(CrudModel dataObj, int userid)
+        public bool AEDSettings(SettingsModel dataObj, int userid)
         {
             bool status = false;
             try

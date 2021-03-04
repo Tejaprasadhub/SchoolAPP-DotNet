@@ -9,6 +9,6 @@ namespace CTS.Business.AdminAPP.Interface
     {
         Task<Dictionary<string, dynamic>> GetSettings(GridParameters pagingParameters);
 
-        bool AEDSettings(CrudModel input, int userid);
+        bool AEDSettings(SettingsModel input, int userid);
     }
 }

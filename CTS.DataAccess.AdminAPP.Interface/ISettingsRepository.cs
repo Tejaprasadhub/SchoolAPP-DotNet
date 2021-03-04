@@ -9,6 +9,6 @@ namespace CTS.DataAccess.AdminAPP.Interface
     {
         DataSet GetSettings();
 
-        bool AEDSettings(CrudModel input, int userid);
+        bool AEDSettings(SettingsModel input, int userid);
     }
 }

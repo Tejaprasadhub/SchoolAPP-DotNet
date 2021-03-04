@@ -43,7 +43,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDSettings(CrudModel dataObj, int userid)
+        public bool AEDSettings(SettingsModel dataObj, int userid)
         {
             try
             {
@@ -52,18 +52,21 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>()
                 {
                     {"@id",dataObj.id },
-                    {"@branchid",dataObj.branchid },
-                    {"@name",dataObj.name },
-                    {"@category",dataObj.category },
-                    {"@description",dataObj.description },
-                    {"@image",dataObj.image },
-                    {"@accept_registrations",dataObj.register },
-                    {"@startdate",dataObj.start },
-                    {"@enddate",dataObj.end },
-                    {"@url",dataObj.url },
-                    {"@userid",userid },
-                    {"@querytype",dataObj.querytype },
-                    {"@status",dataObj.status }
+                    {"@sub_domain",utility.GetDatabasename(utility.GetSubdomain()).ToString()},
+                    {"@tran_key",dataObj.tran_key },
+                    {"@prom_key",dataObj.prom_key },
+                    {"@sender_code",dataObj.sender_code },
+                    {"@from_mail",dataObj.from_mail },
+                    {"@from_mailpassword",dataObj.from_mailpassword },
+                    {"@port",dataObj.port },
+                    {"@vendor_type",dataObj.vendor_type },
+                    {"@userid",dataObj.userid },
+                    {"@password",dataObj.password },
+                    {"@razor_api",dataObj.razor_api },
+                    {"@razor_key",dataObj.razor_key },
+                    {"@paypal_api",dataObj.paypal_api },
+                    {"@paypal_key",dataObj.paypal_key  },
+                    {"@querytype",dataObj.querytype }
                 };
 
                 _db.Execute("AEDSettings", CommandType.StoredProcedure, parameters, "");
