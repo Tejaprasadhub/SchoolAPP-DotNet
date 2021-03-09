@@ -93,7 +93,11 @@ namespace CTS.DataAccess.AdminAPP
                     {"@e2email",dataObj.e2email },
                     {"@userid",userid },
                     {"@querytype",dataObj.querytype },
-                     {"@status",dataObj.status }
+                     {"@status",dataObj.status },
+                     {"@adm_category",dataObj.adm_category },
+                     {"@religion",dataObj.religiion },
+                     {"@blood_group",dataObj.blood_group },
+                     {"@lang_known",dataObj.lang_known }
                 };
 
                 _db.Execute("AEDStudents", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));

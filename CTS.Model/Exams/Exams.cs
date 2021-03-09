@@ -40,6 +40,11 @@ namespace CTS.Model.Exams
         public string email { get; set; }
         public string mobile { get; set; }
         public string address { get; set; }
+        public string d_no { get; set; }
+        public string street { get; set; }
+        public string village { get; set; }
+        public string city { get; set; }
+        public string pincode { get; set; }
         public List<ExamWiseSubjectsList> subjects { get; set; }
 
     }

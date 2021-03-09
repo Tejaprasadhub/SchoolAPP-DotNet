@@ -234,6 +234,11 @@ namespace CTS.Common
                         email = Convert.ToString(rw["email"]),
                         mobile = Convert.ToString(rw["mobile"]),
                         address = Convert.ToString(rw["address"]),
+                        d_no = Convert.ToString(rw["d_no"]),
+                        street = Convert.ToString(rw["street"]),
+                        village = Convert.ToString(rw["village"]),
+                        city = Convert.ToString(rw["city"]),
+                        pincode = Convert.ToString(rw["pincode"]),
                         subjects = dataTable
                         .AsEnumerable()
                         .Select(cl => new ExamWiseSubjectsList

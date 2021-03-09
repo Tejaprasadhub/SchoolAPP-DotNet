@@ -45,6 +45,10 @@ namespace CTS.Model.Students
       public int indexId { get; set; }
       public int querytype { get; set; }
         public string status { get; set; }
+        public string adm_category { get; set; }
+        public string religiion { get; set; }
+        public string blood_group { get; set; }
+        public string lang_known { get; set; }
 
     }
 
