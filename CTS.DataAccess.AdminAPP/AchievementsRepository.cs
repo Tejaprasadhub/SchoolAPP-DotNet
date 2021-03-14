@@ -67,8 +67,12 @@ namespace CTS.DataAccess.AdminAPP
                     {"@status",dataObj.status }
                 };
 
-                _db.Execute("AEDAchievements", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
+                DataSet ds = _db.Execute("AEDAchievements", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
 
+                 if(dataObj.querytype == 1 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return false;
+                }
                 return true;
 
             }
