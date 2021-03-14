@@ -22,6 +22,7 @@ namespace CTS.Model
         public int classid { get; set; }
         public int subjectid { get; set; }
         public int teacherid { get; set; }
+        public int sectionid { get; set; }
         public DateTime periodfrom { get; set; }
         public DateTime periodto { get; set; }
         public string start { get; set; }

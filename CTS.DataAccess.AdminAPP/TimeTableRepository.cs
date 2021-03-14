@@ -57,6 +57,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@id",dataObj.id },
                     {"@classid",dataObj.classid },
                     {"@subjectid",dataObj.subjectid },
+                    {"@sectionid",dataObj.sectionid },
                      {"@teacherid",dataObj.teacherid },
                     {"@periodfrom",dataObj.periodfrom },
                      {"@periodto",dataObj.periodto },
