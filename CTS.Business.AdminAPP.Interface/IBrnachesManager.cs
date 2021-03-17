@@ -9,7 +9,7 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface  IBrnachesManager
     {
-        Task<Dictionary<string, dynamic>> GetBranches(GridParameters pagingParameters);
-        bool AEDBranches(CrudModel input,int userid);
+        Task<Dictionary<string, dynamic>> GetBranches(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDBranches(CrudModel input, UserProfile userProfile);
     }
 }

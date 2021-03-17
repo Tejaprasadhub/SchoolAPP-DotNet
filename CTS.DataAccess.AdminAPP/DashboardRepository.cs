@@ -2,6 +2,7 @@
 using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
+using CTS.Model;
 using CTS.Model.DashBoard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetDashboard(DashBoard reqObj)
+        public DataSet GetDashboard(DashBoard reqObj, UserProfile userProfile)
         {
             try
             {
@@ -31,7 +32,8 @@ namespace CTS.DataAccess.AdminAPP
                 {
                     {"@startdate",reqObj.start },
                     {"@enddate",reqObj.end },
-                    {"@chartType",reqObj.ChartType }
+                    {"@chartType",reqObj.ChartType },
+                    {"@branchId",userProfile.UserBranch }
                 };
 
                 Utility utility = new Utility(_httpContextAccessor);

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassesController : ControllerBase
+    public class ClassesController : ApiController
     {
 
         private readonly IConfiguration _config;
@@ -35,7 +36,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _classesManager.GetClasses(pagingParameters);
+                Dictionary<string, dynamic> apiResult = await _classesManager.GetClasses(pagingParameters,GetUserProfile());
 
                 dt = apiResult["data"];
 
@@ -55,10 +56,9 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDClasses")]
         public async Task<ActionResult> AEDClasses([FromBody] CrudModel dataObj)
         {
-            //var userProfile = GetUserProfile();
             try
             {
-                bool status = _classesManager.AEDClasses(dataObj, 1);
+                bool status = _classesManager.AEDClasses(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

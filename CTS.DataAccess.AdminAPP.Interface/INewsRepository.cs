@@ -8,7 +8,7 @@ namespace CTS.DataAccess.AdminAPP.Interface
 {
     public interface INewsRepository 
     {
-        DataSet GetNews(GridParameters pagingParameters);
-        bool AEDNews(CrudModel input, int userid);
+        DataSet GetNews(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDNews(CrudModel input, UserProfile userProfile);
     }
 }

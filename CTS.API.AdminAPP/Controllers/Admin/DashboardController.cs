@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 using CTS.Model.DashBoard;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DashboardController : ControllerBase
+    public class DashboardController : ApiController
     {
 
         private readonly IConfiguration _config;
@@ -33,7 +34,7 @@ namespace CTS.API.AdminAPP.Controllers
 
             try
             {
-                ds =  _dashboardManager.GetDashboard(reqObj);
+                ds =  _dashboardManager.GetDashboard(reqObj, GetUserProfile());
 
                 return Ok(new { success = true, data = ds });
 

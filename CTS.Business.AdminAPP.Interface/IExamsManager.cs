@@ -9,8 +9,8 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface IExamsManager
     {
-        Task<Dictionary<string, dynamic>> GetExams(GridParameters pagingParameters);
-        bool AEDExams(ExamWiseSubjectsList input, string userid,string title,string year,string status,string id, string querytype);
+        Task<Dictionary<string, dynamic>> GetExams(GridParameters pagingParameters,UserProfile userProfile);
+        bool AEDExams(ExamWiseSubjectsList input, UserProfile userProfile,string title,string year,string status,string id, string querytype);
         bool CheckExistsOrNot(Exams input,string type);
 
         bool DeleteExamwiseSubjects(string examid);

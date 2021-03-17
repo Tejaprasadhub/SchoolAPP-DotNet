@@ -31,6 +31,7 @@ namespace CTS.Model
         public string url { get; set; }
         public string category { get; set; }
         public string register { get; set; }
+        public int section { get; set; }
         public int querytype { get; set; }
 
 

@@ -23,7 +23,7 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetNews(GridParameters pagingParameters)
+        public async Task<Dictionary<string, dynamic>> GetNews(GridParameters pagingParameters,UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -32,7 +32,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _newsRepository.GetNews(pagingParameters);
+                gridDataSet = _newsRepository.GetNews(pagingParameters,userProfile);
 
                 Utility utility = new Utility(_httpContextAccessor);
 
@@ -47,12 +47,12 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDNews(CrudModel dataObj, int userid)
+        public bool AEDNews(CrudModel dataObj, UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _newsRepository.AEDNews(dataObj, userid);
+                status = _newsRepository.AEDNews(dataObj, userProfile);
 
             }
             catch (Exception ex)

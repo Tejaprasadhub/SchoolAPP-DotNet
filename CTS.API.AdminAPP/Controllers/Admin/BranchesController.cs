@@ -34,14 +34,12 @@ namespace CTS.API.AdminAPP.Controllers
 
             DataSet ds = new DataSet();
 
-            UserProfile userProfile = GetUserProfile(); 
-
             DataTable dt = null;
             try
             {
                 var count = 0;
 
-                Dictionary<string,dynamic> apiResult = await _branchesManager.GetBranches(pagingParameters);
+                Dictionary<string,dynamic> apiResult = await _branchesManager.GetBranches(pagingParameters, GetUserProfile());
 
                 dt = apiResult["data"];
 
@@ -60,10 +58,9 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDBranches")]
         public async Task<ActionResult> AEDBranches([FromBody]CrudModel dataObj)
         {
-            //var userProfile = GetUserProfile();
             try
             {
-                bool status =  _branchesManager.AEDBranches(dataObj,1);
+                bool status =  _branchesManager.AEDBranches(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

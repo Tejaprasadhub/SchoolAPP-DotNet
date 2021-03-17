@@ -8,7 +8,7 @@ namespace CTS.DataAccess.AdminAPP.Interface
 {
     public interface IClassesRepository
     {
-        DataSet GetClasses(GridParameters pagingParameters);
-        bool AEDClasses(CrudModel input, int userid);
+        DataSet GetClasses(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDClasses(CrudModel input, UserProfile userProfile);
     }
 }

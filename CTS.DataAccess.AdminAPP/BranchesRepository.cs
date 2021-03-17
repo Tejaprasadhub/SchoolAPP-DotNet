@@ -23,7 +23,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetBranches(GridParameters pagingParameters)
+        public DataSet GetBranches(GridParameters pagingParameters, UserProfile userProfile)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDBranches(CrudModel dataObj,int userid)
+        public bool AEDBranches(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@id",dataObj.id },
                     {"@code",dataObj.code },
                     {"@title",dataObj.title },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                      {"@status",dataObj.status }
                 };

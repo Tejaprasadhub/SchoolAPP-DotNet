@@ -23,7 +23,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetNews(GridParameters pagingParameters)
+        public DataSet GetNews(GridParameters pagingParameters, UserProfile userProfile)
         {
             try
             {
@@ -33,6 +33,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
+                    {"@branchId",userProfile.UserBranch },
                     {"@idValue",pagingParameters.idValue }
                 };
 
@@ -46,7 +47,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDNews(CrudModel dataObj, int userid)
+        public bool AEDNews(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -59,7 +60,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@title",dataObj.title },
                     {"@date",dataObj.date },
                     {"@description",dataObj.description },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                     {"@status",dataObj.status }
                 };

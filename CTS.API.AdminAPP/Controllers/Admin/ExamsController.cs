@@ -35,7 +35,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _examsManager.GetExams(pagingParameters);
+                Dictionary<string, dynamic> apiResult = await _examsManager.GetExams(pagingParameters,GetUserProfile());
 
                 dt = apiResult["data"];
 
@@ -54,8 +54,6 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDExams")]
         public async Task<ActionResult> AEDExams([FromBody] Exams dataObj)
         {
-            var userProfile = GetUserProfile();
-
             ExamWiseSubjectsList examWiseSubjects = new ExamWiseSubjectsList();
             bool status = false;
             try
@@ -66,7 +64,7 @@ namespace CTS.API.AdminAPP.Controllers
                 {
                     foreach (var objectData in dataObj.subjects)
                     {
-                        status = _examsManager.AEDExams(objectData, userProfile.UserId,dataObj.title,dataObj.year,dataObj.status,dataObj.id,dataObj.querytype);
+                        status = _examsManager.AEDExams(objectData, GetUserProfile(), dataObj.title,dataObj.year,dataObj.status,dataObj.id,dataObj.querytype);
                     }
                 }
                 else if (dataObj.querytype == "2")
@@ -76,14 +74,14 @@ namespace CTS.API.AdminAPP.Controllers
                     {
                         foreach (var objectData in dataObj.subjects)
                         {
-                            status = _examsManager.AEDExams(objectData, userProfile.UserId, dataObj.title, dataObj.year, dataObj.status, dataObj.id, dataObj.querytype);
+                            status = _examsManager.AEDExams(objectData, GetUserProfile(), dataObj.title, dataObj.year, dataObj.status, dataObj.id, dataObj.querytype);
                         }
                     }
                     status = true;
                 }
                 else if (dataObj.querytype == "3")
                 {                   
-                    status = _examsManager.AEDExams(examWiseSubjects, userProfile.UserId, dataObj.title, dataObj.year, dataObj.status, dataObj.id, dataObj.querytype);
+                    status = _examsManager.AEDExams(examWiseSubjects, GetUserProfile(), dataObj.title, dataObj.year, dataObj.status, dataObj.id, dataObj.querytype);
                  
                     status = true;
                 }

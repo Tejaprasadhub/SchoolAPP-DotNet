@@ -22,7 +22,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetClasses(GridParameters pagingParameters)
+        public DataSet GetClasses(GridParameters pagingParameters, UserProfile userProfile)
         {
             try
             {
@@ -33,7 +33,8 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
-                    {"@idValue",pagingParameters.idValue }
+                    {"@idValue",pagingParameters.idValue },
+                    {"@branchId",userProfile.UserBranch }
                 };
 
                 ds = _db.Execute("GetClasses", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
@@ -45,7 +46,7 @@ namespace CTS.DataAccess.AdminAPP
                 throw ex;
             }
         }
-        public bool AEDClasses(CrudModel dataObj, int userid)
+        public bool AEDClasses(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -55,11 +56,11 @@ namespace CTS.DataAccess.AdminAPP
                 {
                     {"@id",dataObj.id },
                     {"@name",dataObj.name },
-                    {"@noofsections",dataObj.noofsections },
-                    {"@userid",userid },
+                    {"@branchId",dataObj.branchid },
+                    {"@noofsections",dataObj.section },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                     {"@status",dataObj.status }
-
                 };
 
                 DataSet ds = _db.Execute("AEDClasses", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));

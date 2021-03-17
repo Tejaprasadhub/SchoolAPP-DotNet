@@ -25,7 +25,7 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetTeachers(GridParameters pagingParameters)
+        public async Task<Dictionary<string, dynamic>> GetTeachers(GridParameters pagingParameters, UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -34,7 +34,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _teachersRepository.GetTeachers(pagingParameters);
+                gridDataSet = _teachersRepository.GetTeachers(pagingParameters,userProfile);
 
                 Utility utility = new Utility(_httpContextAccessor);
 
@@ -52,12 +52,12 @@ namespace CTS.Business.AdminAPP
         }
 
 
-        public bool AEDTeachers(createTeacher dataObj, int userid)
+        public bool AEDTeachers(createTeacher dataObj,UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _teachersRepository.AEDTeachers(dataObj, userid);
+                status = _teachersRepository.AEDTeachers(dataObj,userProfile);
 
             }
             catch (Exception ex)

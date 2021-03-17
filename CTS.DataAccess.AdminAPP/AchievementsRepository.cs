@@ -24,7 +24,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetAchievement(GridParameters pagingParameters)
+        public DataSet GetAchievement(GridParameters pagingParameters, UserProfile userProfile)
         {
             try
             {
@@ -35,7 +35,8 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
-                    {"@idValue",pagingParameters.idValue }
+                    {"@idValue",pagingParameters.idValue },
+                    {"@branchId",userProfile.UserBranch }
                 };
 
 
@@ -49,7 +50,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDAchievements(CrudModel dataObj, int userid)
+        public bool AEDAchievements(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@title",dataObj.title },
                      {"@image",dataObj.image },
                     {"@date",dataObj.date },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                     {"@status",dataObj.status }
                 };

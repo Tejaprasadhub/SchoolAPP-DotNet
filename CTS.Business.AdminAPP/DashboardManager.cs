@@ -25,12 +25,12 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetDashboard(DashBoard reqObj)
+        public DataSet GetDashboard(DashBoard reqObj, UserProfile userProfile)
         {
             DataSet gridDataSet = null;
             try
             {
-                gridDataSet = _dashboardRepository.GetDashboard(reqObj);
+                gridDataSet = _dashboardRepository.GetDashboard(reqObj, userProfile);
 
             }
             catch (Exception ex)

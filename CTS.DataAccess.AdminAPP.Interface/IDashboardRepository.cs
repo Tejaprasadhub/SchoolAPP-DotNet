@@ -1,4 +1,5 @@
-﻿using CTS.Model.DashBoard;
+﻿using CTS.Model;
+using CTS.Model.DashBoard;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,7 @@ namespace CTS.DataAccess.AdminAPP.Interface
 {
     public interface IDashboardRepository
     {
-        DataSet GetDashboard(DashBoard reqObj);
+        DataSet GetDashboard(DashBoard reqObj,UserProfile userProfile );
 
     }
 }

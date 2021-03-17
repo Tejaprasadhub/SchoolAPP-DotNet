@@ -10,9 +10,9 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface IStudentsManager
     {
-        Task<Dictionary<string, dynamic>> GetStudents(GridParameters pagingParameters);
+        Task<Dictionary<string, dynamic>> GetStudents(GridParameters pagingParameters, UserProfile userProfile);
 
-        bool AEDStudents(Students input, string userid);
+        bool AEDStudents(Students input, UserProfile userProfile);
 
         DataTable GetStudentProfile(string spName, string studentid);
         DataTable GetExamWiseSubjectMarks(ExamWiseSubjects spName);

@@ -10,7 +10,7 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface IEventsManager
     {
-        DataSet GetEvents(Events reqObj);
-        bool AEDEvents(CrudModel input, int userid);
+        DataSet GetEvents(Events reqObj, UserProfile userProfile);
+        bool AEDEvents(CrudModel input, UserProfile userProfile);
     }
 }

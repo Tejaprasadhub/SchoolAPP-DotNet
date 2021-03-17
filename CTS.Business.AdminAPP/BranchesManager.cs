@@ -25,7 +25,7 @@ namespace CTS.Business.AdminAPP
             _branchesRepository = branchesRepository;
             this._httpContextAccessor = httpContextAccessor;
         }
-        public async Task<Dictionary<string,dynamic>> GetBranches(GridParameters pagingParameters)
+        public async Task<Dictionary<string,dynamic>> GetBranches(GridParameters pagingParameters,UserProfile userProfile)
         {
            
             DataSet gridDataSet = null;
@@ -34,7 +34,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _branchesRepository.GetBranches(pagingParameters);
+                gridDataSet = _branchesRepository.GetBranches(pagingParameters,userProfile);
 
                 Utility utility = new Utility(_httpContextAccessor);
 
@@ -49,12 +49,12 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDBranches(CrudModel dataObj,int userid)
+        public bool AEDBranches(CrudModel dataObj, UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                 status = _branchesRepository.AEDBranches(dataObj,userid);
+                 status = _branchesRepository.AEDBranches(dataObj, userProfile);
                 
             }
             catch(Exception ex)

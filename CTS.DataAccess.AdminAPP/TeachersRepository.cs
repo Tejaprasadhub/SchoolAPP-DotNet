@@ -24,7 +24,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetTeachers(GridParameters pagingParameters)
+        public DataSet GetTeachers(GridParameters pagingParameters,UserProfile userProfile)
         {
             try
             {
@@ -35,6 +35,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
+                    {"@branchId",userProfile.UserBranch},
                     {"@idValue",pagingParameters.idValue }
                 };
 
@@ -48,7 +49,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDTeachers(createTeacher dataObj, int userid)
+        public bool AEDTeachers(createTeacher dataObj,UserProfile userProfile)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace CTS.DataAccess.AdminAPP
                      {"@indexId",dataObj.indexId },
                      {"@status",dataObj.status },
                      {"@querytype",dataObj.querytype },
-                     {"@userid",userid },
+                     {"@userid",userProfile.UserId },
                      {"@LID",0 },
 
             };

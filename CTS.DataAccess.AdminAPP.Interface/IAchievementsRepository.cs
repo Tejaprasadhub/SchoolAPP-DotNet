@@ -7,7 +7,7 @@ namespace CTS.DataAccess.AdminAPP.Interface
 {
     public interface IAchievementsRepository
     {
-         DataSet GetAchievement(GridParameters pagingParameters);
-        bool AEDAchievements(CrudModel input, int userid);
+         DataSet GetAchievement(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDAchievements(CrudModel input, UserProfile userProfile);
     }
 }

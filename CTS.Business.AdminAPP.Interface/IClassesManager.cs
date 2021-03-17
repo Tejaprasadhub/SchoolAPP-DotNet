@@ -8,7 +8,7 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface IClassesManager
     {
-        Task<Dictionary<string, dynamic>> GetClasses(GridParameters pagingParameters);
-        bool AEDClasses(CrudModel input, int userid);
+        Task<Dictionary<string, dynamic>> GetClasses(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDClasses(CrudModel input, UserProfile userProfile);
     }
 }

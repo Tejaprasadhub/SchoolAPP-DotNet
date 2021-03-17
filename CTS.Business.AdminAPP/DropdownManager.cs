@@ -1,5 +1,6 @@
 ﻿using CTS.Business.AdminAPP.Interface;
 using CTS.DataAccess.AdminAPP.Interface;
+using CTS.Model;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace CTS.Business.AdminAPP
             _dropdownRepository = dropdownRepository;
         }
 
-        public  DataTable GetDropdowns(string spName)
+        public  DataTable GetDropdowns(string spName,UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -27,7 +28,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet =  _dropdownRepository.GetDropdowns(spName);
+                gridDataSet =  _dropdownRepository.GetDropdowns(spName,userProfile);
 
                 dt = gridDataSet.Tables[0];
                

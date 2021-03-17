@@ -25,7 +25,7 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public  DataSet GetEvents(Events reqObj)
+        public  DataSet GetEvents(Events reqObj,UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -33,7 +33,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _eventsRepository.GetEvents(reqObj);                
+                gridDataSet = _eventsRepository.GetEvents(reqObj, userProfile);                
 
             }
             catch (Exception ex)
@@ -44,12 +44,12 @@ namespace CTS.Business.AdminAPP
             return gridDataSet;
         }
 
-        public bool AEDEvents(CrudModel dataObj, int userid)
+        public bool AEDEvents(CrudModel dataObj, UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _eventsRepository.AEDEvents(dataObj, userid);
+                status = _eventsRepository.AEDEvents(dataObj, userProfile);
 
             }
             catch (Exception ex)

@@ -2,6 +2,7 @@
 using CTS.Core.DataAccess;
 using CTS.DataAccess.AdminAPP.Interface;
 using CTS.DataAccess.Core;
+using CTS.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,7 +23,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetDropdowns(string spName)
+        public DataSet GetDropdowns(string spName,UserProfile userProfile)
         {
             try
             {
@@ -33,6 +34,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@dropDownFor",spName },
+                    {"@branchId",userProfile.UserBranch },
                 };
 
                 ds = _db.Execute("GetDropdowns", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));

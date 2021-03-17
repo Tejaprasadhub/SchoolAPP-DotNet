@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 using CTS.Model.Teachers;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TeachersController : ControllerBase
+    public class TeachersController : ApiController
     {
         private readonly IConfiguration _config;
         private readonly ITeachersManager _teachersManager;
@@ -35,7 +36,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _teachersManager.GetTeachers(pagingParameters);
+                Dictionary<string, dynamic> apiResult = await _teachersManager.GetTeachers(pagingParameters,GetUserProfile());
 
                 dt = apiResult["data"];
                 
@@ -58,7 +59,7 @@ namespace CTS.API.AdminAPP.Controllers
             //var userProfile = GetUserProfile();
             try
             {
-                bool status = _teachersManager.AEDTeachers(dataObj, 1);
+                bool status = _teachersManager.AEDTeachers(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

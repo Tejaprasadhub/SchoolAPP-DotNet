@@ -8,7 +8,7 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface IAchievementManager
     {
-        Task<Dictionary<string, dynamic>> GetAchievement(GridParameters pagingParameters);
-        bool AEDAchievements(CrudModel input, int userid);
+        Task<Dictionary<string, dynamic>> GetAchievement(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDAchievements(CrudModel input, UserProfile userProfile);
     }
 }

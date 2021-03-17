@@ -38,7 +38,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _studentssManager.GetStudents(pagingParameters);
+                Dictionary<string, dynamic> apiResult = await _studentssManager.GetStudents(pagingParameters,GetUserProfile());
 
                 dt = apiResult["data"];
 
@@ -57,11 +57,9 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDStudents")]
         public async Task<ActionResult> AEDStudents([FromBody]Students dataObj)
         {
-            var userProfile = GetUserProfile();
-            
             try
             {
-                bool status = _studentssManager.AEDStudents(dataObj, userProfile.UserId);
+                bool status = _studentssManager.AEDStudents(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

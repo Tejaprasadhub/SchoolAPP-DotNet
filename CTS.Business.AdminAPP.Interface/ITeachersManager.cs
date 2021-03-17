@@ -9,7 +9,7 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface ITeachersManager
     {
-        Task<Dictionary<string, dynamic>> GetTeachers(GridParameters pagingParameters);
-        bool AEDTeachers(createTeacher input, int userid);
+        Task<Dictionary<string, dynamic>> GetTeachers(GridParameters pagingParameters,UserProfile userProfile);
+        bool AEDTeachers(createTeacher input,UserProfile userProfile);
     }
 }

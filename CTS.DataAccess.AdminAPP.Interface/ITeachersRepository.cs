@@ -9,7 +9,7 @@ namespace CTS.DataAccess.AdminAPP.Interface
 {
     public interface ITeachersRepository
     {
-        DataSet GetTeachers(GridParameters pagingParameters);
-        bool AEDTeachers(createTeacher input, int userid);
+        DataSet GetTeachers(GridParameters pagingParameters,UserProfile userProfile);
+        bool AEDTeachers(createTeacher input,UserProfile userProfile);
     }
 }

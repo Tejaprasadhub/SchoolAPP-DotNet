@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 using CTS.Model.Events;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class EventsController : ApiController
     {
 
         private readonly IConfiguration _config;
@@ -35,7 +36,7 @@ namespace CTS.API.AdminAPP.Controllers
             try
             {
 
-                 ds =  _eventsManager.GetEvents(reqObj);
+                 ds =  _eventsManager.GetEvents(reqObj,GetUserProfile());
 
                 //returnObj.Add("data", ds.Tables[0]);
 
@@ -51,10 +52,9 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDEvents")]
         public async Task<ActionResult> AEDEvents([FromBody] CrudModel dataObj)
         {
-            //var userProfile = GetUserProfile();
             try
             {
-                bool status = _eventsManager.AEDEvents(dataObj, 1);
+                bool status = _eventsManager.AEDEvents(dataObj,GetUserProfile());
 
 
                 return Ok(new { success = status });

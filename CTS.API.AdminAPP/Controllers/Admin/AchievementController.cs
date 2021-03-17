@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace CTS.API.AdminAPP.Controllers
     [Route("api/[controller]")]
     [ApiController]
     
-    public class AchievementController : ControllerBase
+    public class AchievementController : ApiController
     {
         private readonly IConfiguration _config;
         private readonly IAchievementManager _achievementManager;
@@ -35,7 +36,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _achievementManager.GetAchievement(pagingParameters);
+                Dictionary<string, dynamic> apiResult = await _achievementManager.GetAchievement(pagingParameters,GetUserProfile());
 
                 dt = apiResult["data"];
 
@@ -58,7 +59,7 @@ namespace CTS.API.AdminAPP.Controllers
             //var userProfile = GetUserProfile();
             try
             {
-                bool status = _achievementManager.AEDAchievements(dataObj, 1);
+                bool status = _achievementManager.AEDAchievements(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

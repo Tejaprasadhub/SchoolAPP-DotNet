@@ -9,8 +9,8 @@ namespace CTS.DataAccess.AdminAPP.Interface
 {
     public interface IStudentsRepository
     {
-        DataSet GetStudents(GridParameters pagingParameters);
-        bool AEDStudents(Students input, string userid);
+        DataSet GetStudents(GridParameters pagingParameters,UserProfile userProfile);
+        bool AEDStudents(Students input, UserProfile userProfile);
 
         DataSet GetStudentProfile(string spName, string studentid);
         DataSet GetExamWiseSubjectMarks(ExamWiseSubjects dataObj);

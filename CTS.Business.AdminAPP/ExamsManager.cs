@@ -25,7 +25,7 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetExams(GridParameters pagingParameters)
+        public async Task<Dictionary<string, dynamic>> GetExams(GridParameters pagingParameters, UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -34,7 +34,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _examsRepository.GetExams(pagingParameters);
+                gridDataSet = _examsRepository.GetExams(pagingParameters,userProfile);
 
                 Utility utility = new Utility(_httpContextAccessor);
 
@@ -49,12 +49,12 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDExams(ExamWiseSubjectsList dataObj, string userid,string title,string year,string estatus,string id,string querytype)
+        public bool AEDExams(ExamWiseSubjectsList dataObj, UserProfile userProfile,string title,string year,string estatus,string id,string querytype)
         {
             bool status = false;
             try
             {
-                status = _examsRepository.AEDExams(dataObj, userid,title,year, estatus,id,querytype);
+                status = _examsRepository.AEDExams(dataObj, userProfile,title,year, estatus,id,querytype);
 
             }
             catch (Exception ex)

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DropdownController : ControllerBase
+    public class DropdownController : ApiController
     {
         private readonly IConfiguration _config;
         private readonly IDropdownManager _dropdownManager;
@@ -34,7 +35,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 foreach (string spName in data)
                 {
-                    dt =  _dropdownManager.GetDropdowns(spName);
+                    dt =  _dropdownManager.GetDropdowns(spName,GetUserProfile());
 
                     returnObj.Add(spName, dt);
                 }               

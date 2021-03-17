@@ -24,7 +24,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetExams(GridParameters pagingParameters)
+        public DataSet GetExams(GridParameters pagingParameters,UserProfile userProfile)
         {
             try
             {
@@ -34,6 +34,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
+                    {"@branchId",userProfile.UserBranch },
                     {"@idValue",pagingParameters.idValue }
                 };
 
@@ -47,7 +48,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDExams(ExamWiseSubjectsList dataObj, string userid,string title,string year,string status,string id, string querytype)
+        public bool AEDExams(ExamWiseSubjectsList dataObj, UserProfile userProfile,string title,string year,string status,string id, string querytype)
         {
             try
             {
@@ -58,7 +59,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@id",id },
                     {"@title",title },
                     {"@year",year },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@status",status },
                     {"@querytype",querytype },
                     {"@classId",dataObj.classid },

@@ -24,7 +24,7 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetAchievement(GridParameters pagingParameters)
+        public async Task<Dictionary<string, dynamic>> GetAchievement(GridParameters pagingParameters, UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -33,7 +33,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _achievementsRepository.GetAchievement(pagingParameters);
+                gridDataSet = _achievementsRepository.GetAchievement(pagingParameters,userProfile);
 
                 Utility utility = new Utility(_httpContextAccessor);
 
@@ -48,12 +48,12 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDAchievements(CrudModel dataObj, int userid)
+        public bool AEDAchievements(CrudModel dataObj, UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _achievementsRepository.AEDAchievements(dataObj, userid);
+                status = _achievementsRepository.AEDAchievements(dataObj, userProfile);
 
             }
             catch (Exception ex)

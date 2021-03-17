@@ -25,7 +25,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetEvents(Events reqObj)
+        public DataSet GetEvents(Events reqObj, UserProfile userProfile)
         {
             try
             {
@@ -37,6 +37,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@startdate",reqObj.start },
                     {"@enddate",reqObj.end },
                     {"@queryType",reqObj.querytype },
+                    {"@branchId",userProfile.UserBranch },
                     {"@idValue",reqObj.id }
                 };
 
@@ -50,7 +51,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDEvents(CrudModel dataObj, int userid)
+        public bool AEDEvents(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -68,7 +69,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@startdate",dataObj.start },
                     {"@enddate",dataObj.end },
                     {"@url",dataObj.url },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                     {"@status",dataObj.status } 
                 };
