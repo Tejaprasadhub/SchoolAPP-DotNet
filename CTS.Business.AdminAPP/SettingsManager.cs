@@ -48,12 +48,12 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDSettings(SettingsModel dataObj, int userid)
+        public bool AEDSettings(SettingsModel dataObj,UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _settingsRepository.AEDSettings(dataObj, userid);
+                status = _settingsRepository.AEDSettings(dataObj, userProfile);
 
             }
             catch (Exception ex)

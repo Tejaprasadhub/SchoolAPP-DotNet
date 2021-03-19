@@ -46,7 +46,7 @@ namespace CTS.DataAccess.AdminAPP
                 throw ex;
             }
         }
-        public bool AEDParents(CrudModel dataObj, int userid)
+        public bool AEDParents(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace CTS.DataAccess.AdminAPP
                       {"@mobile",dataObj.mobile },
                     {"@gender",dataObj.gender },
                       {"@email",dataObj.email },                    
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserBranch },
                     {"@querytype",dataObj.querytype },
                      {"@status",dataObj.status }
                 };

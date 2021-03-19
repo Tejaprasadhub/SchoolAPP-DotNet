@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QualificationsController : ControllerBase
+    public class QualificationsController : ApiController
     {
         private readonly IConfiguration _config;
         private readonly IQualificationsManager _qualificationsManager;
@@ -57,7 +58,7 @@ namespace CTS.API.AdminAPP.Controllers
             //var userProfile = GetUserProfile();
             try
             {
-                bool status = _qualificationsManager.AEDQualifications(dataObj, 1);
+                bool status = _qualificationsManager.AEDQualifications(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

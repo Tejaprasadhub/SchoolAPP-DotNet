@@ -34,7 +34,7 @@ namespace CTS.API.AdminAPP.Controllers
             {
                 var count = 0;
 
-                Dictionary<string, dynamic> apiResult = await _usersManager.GetUsers(pagingParameters);
+                Dictionary<string, dynamic> apiResult = await _usersManager.GetUsers(pagingParameters,GetUserProfile());
 
                 dt = apiResult["data"];
 
@@ -56,7 +56,7 @@ namespace CTS.API.AdminAPP.Controllers
             var userProfile = GetUserProfile();
             try
             {
-                bool status = _usersManager.AEDUsers(dataObj, userProfile.UserId);
+                bool status = _usersManager.AEDUsers(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });
@@ -100,9 +100,9 @@ namespace CTS.API.AdminAPP.Controllers
                     routeUrl = routeUrl.Substring(0, routeUrl.IndexOf('/'));
                 }
             }
-            var result = _usersManager.AuthorizeComponentAccess(routeUrl, userProfile.UserId);
+            var result = _usersManager.AuthorizeComponentAccess(routeUrl, GetUserProfile());
 
-            permissionsDataTable = _usersManager.permissionsOnComponent(routeUrl, userProfile.UserId);
+            permissionsDataTable = _usersManager.permissionsOnComponent(routeUrl, GetUserProfile();
 
             return Ok(new { status = result.status, featureOptions = permissionsDataTable });
         }

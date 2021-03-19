@@ -30,8 +30,6 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("GetRoleAccess")]
         public async Task<ActionResult> GetTeachers([FromBody] GridParameters pagingParameters)
         {
-            //var userProfile = GetUserProfile();
-
             DataSet ds = new DataSet();
 
             DataTable dt = null;

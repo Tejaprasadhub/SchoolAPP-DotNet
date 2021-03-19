@@ -24,7 +24,7 @@ namespace CTS.Business.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<Dictionary<string, dynamic>> GetUsers(GridParameters pagingParameters)
+        public async Task<Dictionary<string, dynamic>> GetUsers(GridParameters pagingParameters, UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -33,7 +33,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _usersRepository.GetUsers(pagingParameters);
+                gridDataSet = _usersRepository.GetUsers(pagingParameters,userProfile);
 
                 Utility utility = new Utility(_httpContextAccessor);
 
@@ -48,12 +48,12 @@ namespace CTS.Business.AdminAPP
             return returnObj;
         }
 
-        public bool AEDUsers(CrudModel dataObj, string userid)
+        public bool AEDUsers(CrudModel dataObj, UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _usersRepository.AEDUsers(dataObj, userid);
+                status = _usersRepository.AEDUsers(dataObj, userProfile);
 
             }
             catch (Exception ex)
@@ -63,13 +63,13 @@ namespace CTS.Business.AdminAPP
             return status;
         }
 
-        public AuthorizationResult AuthorizeComponentAccess(string routeUrl, string userid)
+        public AuthorizationResult AuthorizeComponentAccess(string routeUrl, UserProfile userProfile)
         {
             try
             {
                 DataSet ds = new DataSet();
 
-                ds = _usersRepository.AuthorizeComponentAccess(routeUrl, userid);
+                ds = _usersRepository.AuthorizeComponentAccess(routeUrl, userProfile);
 
                 AuthorizationResult authorizationResult = new AuthorizationResult();
                 foreach (DataTable table in ds.Tables)
@@ -88,7 +88,7 @@ namespace CTS.Business.AdminAPP
             }
         }
 
-        public DataTable permissionsOnComponent(string routeUrl, string userid)
+        public DataTable permissionsOnComponent(string routeUrl, UserProfile userProfile)
         {
 
             DataSet gridDataSet = null;
@@ -97,7 +97,7 @@ namespace CTS.Business.AdminAPP
             try
             {
 
-                gridDataSet = _usersRepository.permissionsOnComponent(routeUrl,userid);
+                gridDataSet = _usersRepository.permissionsOnComponent(routeUrl,userProfile);
 
                 dt = gridDataSet.Tables[0];
 

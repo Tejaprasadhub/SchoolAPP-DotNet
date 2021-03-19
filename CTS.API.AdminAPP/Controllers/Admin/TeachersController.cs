@@ -56,7 +56,6 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDTeachers")]
         public async Task<ActionResult> AEDTeachers([FromBody] createTeacher dataObj)
         {
-            //var userProfile = GetUserProfile();
             try
             {
                 bool status = _teachersManager.AEDTeachers(dataObj, GetUserProfile());

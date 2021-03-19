@@ -10,10 +10,10 @@ namespace CTS.Business.AdminAPP.Interface
 {
     public interface IUsersManager
     {
-        Task<Dictionary<string, dynamic>> GetUsers(GridParameters pagingParameters);
-        bool AEDUsers(CrudModel input, string userid);
+        Task<Dictionary<string, dynamic>> GetUsers(GridParameters pagingParameters, UserProfile userProfile);
+        bool AEDUsers(CrudModel input, UserProfile userProfile);
 
-        AuthorizationResult AuthorizeComponentAccess(string routeUrl, string userid);
-        DataTable permissionsOnComponent(string routeUrl, string userid);
+        AuthorizationResult AuthorizeComponentAccess(string routeUrl, UserProfile userProfile);
+        DataTable permissionsOnComponent(string routeUrl, UserProfile userProfile);
     }
 }

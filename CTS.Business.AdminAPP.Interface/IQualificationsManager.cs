@@ -10,6 +10,6 @@ namespace CTS.Business.AdminAPP.Interface
     public interface IQualificationsManager
     {
         Task<Dictionary<string, dynamic>> GetQualifications(GridParameters pagingParameters);
-        bool AEDQualifications(CrudModel input, int userid);
+        bool AEDQualifications(CrudModel input,UserProfile userProfile);
     }
 }

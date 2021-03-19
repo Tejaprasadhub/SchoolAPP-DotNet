@@ -9,6 +9,6 @@ namespace CTS.Business.AdminAPP.Interface
     public interface ISubjectsManager
     {
         Task<Dictionary<string, dynamic>> GetSubjects(GridParameters pagingParameters);
-        bool AEDSubjects(CrudModel input, int userid);
+        bool AEDSubjects(CrudModel input,UserProfile userProfile);
     }
 }

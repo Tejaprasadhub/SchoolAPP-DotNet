@@ -9,6 +9,6 @@ namespace CTS.DataAccess.AdminAPP.Interface
     public interface IParentsRepository
     {
         DataSet GetParents(GridParameters pagingParameters);
-        bool AEDParents(CrudModel input, int userid);
+        bool AEDParents(CrudModel input,UserProfile userProfile);
     }
 }

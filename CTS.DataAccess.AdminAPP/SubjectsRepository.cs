@@ -46,7 +46,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDSubjects(CrudModel dataObj, int userid)
+        public bool AEDSubjects(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@id",dataObj.id },
                     {"@code",dataObj.code },
                     {"@name",dataObj.name },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                     {"@status",dataObj.status }
 

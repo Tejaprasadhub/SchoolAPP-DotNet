@@ -43,7 +43,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDSettings(SettingsModel dataObj, int userid)
+        public bool AEDSettings(SettingsModel dataObj,UserProfile userProfile)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@from_mailpassword",dataObj.from_mailpassword },
                     {"@port",dataObj.port },
                     {"@vendor_type",dataObj.vendor_type },
-                    {"@userid",dataObj.userid },
+                    {"@userid",userProfile.UserId },
                     {"@password",dataObj.password },
                     {"@razor_api",dataObj.razor_api },
                     {"@razor_key",dataObj.razor_key },

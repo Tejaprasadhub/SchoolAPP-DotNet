@@ -9,6 +9,6 @@ namespace CTS.Business.AdminAPP.Interface
     public interface IParentsManager
     {
         Task<Dictionary<string, dynamic>> GetParents(GridParameters pagingParameters);
-        bool AEDParents(CrudModel input, int userid);
+        bool AEDParents(CrudModel input, UserProfile userProfile);
     }
 }

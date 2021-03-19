@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CTS.Business.AdminAPP.Interface;
+using CTS.Common;
 using CTS.Model;
 
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ namespace CTS.API.AdminAPP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentsController : ControllerBase
+    public class ParentsController : ApiController
     {
 
         private readonly IConfiguration _config;
@@ -60,7 +61,7 @@ namespace CTS.API.AdminAPP.Controllers
             //var userProfile = GetUserProfile();
             try
             {
-                bool status = _parentsManager.AEDParents(dataObj, 1);
+                bool status = _parentsManager.AEDParents(dataObj, GetUserProfile());
 
 
                 return Ok(new { success = status });

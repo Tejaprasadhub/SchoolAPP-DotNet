@@ -23,7 +23,7 @@ namespace CTS.DataAccess.AdminAPP
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public DataSet GetUsers(GridParameters pagingParameters)
+        public DataSet GetUsers(GridParameters pagingParameters,UserProfile userProfile)
         {
             try
             {
@@ -33,6 +33,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@queryType",pagingParameters.queryType },
+                    {"@branchId",userProfile.UserBranch},
                     {"@idValue",pagingParameters.idValue }
                 };
 
@@ -46,7 +47,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public bool AEDUsers(CrudModel dataObj, string userid)
+        public bool AEDUsers(CrudModel dataObj, UserProfile userProfile)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace CTS.DataAccess.AdminAPP
                     {"@disname",dataObj.dispName },
                     {"@password",dataObj.password },
                     {"@status",dataObj.userstatus },
-                    {"@userid",userid },
+                    {"@userid",userProfile.UserId },
                     {"@querytype",dataObj.querytype },
                     {"@email",dataObj.email },
                     {"@teacher",dataObj.teacher },
@@ -83,7 +84,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public DataSet AuthorizeComponentAccess(string routeUrl, string userid)
+        public DataSet AuthorizeComponentAccess(string routeUrl, UserProfile userProfile)
         {
             try
             {
@@ -92,7 +93,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                     {"@routeUrl",routeUrl },
-                    {"@userid",userid }
+                    {"@userid",userProfile.UserId }
                 };
                 ds = _db.Execute("AuthorizeComponentAccess", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));
                 return ds;
@@ -103,7 +104,7 @@ namespace CTS.DataAccess.AdminAPP
             }
         }
 
-        public DataSet permissionsOnComponent(string routeUrl, string userid)
+        public DataSet permissionsOnComponent(string routeUrl, UserProfile userProfile)
         {
             try
             {
@@ -114,7 +115,7 @@ namespace CTS.DataAccess.AdminAPP
                 Dictionary<string, dynamic> parameters = new Dictionary<string, dynamic>
                 {
                    {"@routeUrl",routeUrl },
-                    {"@userid",userid }
+                    {"@userid",userProfile.UserId }
                 };
 
                 ds = _db.Execute("permissionsOnComponent", CommandType.StoredProcedure, parameters, utility.GetDatabasename(utility.GetSubdomain()));

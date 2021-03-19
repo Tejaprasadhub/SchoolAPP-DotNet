@@ -56,7 +56,6 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDNews")]
         public async Task<ActionResult> AEDNews([FromBody] CrudModel dataObj)
         {
-            //var userProfile = GetUserProfile();
             try
             {
                 bool status = _newsManager.AEDNews(dataObj, GetUserProfile());

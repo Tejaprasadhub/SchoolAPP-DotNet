@@ -56,7 +56,6 @@ namespace CTS.API.AdminAPP.Controllers
         [HttpPost("AEDAchievements")]
         public async Task<ActionResult> AEDAchievements([FromBody] CrudModel dataObj)
         {
-            //var userProfile = GetUserProfile();
             try
             {
                 bool status = _achievementManager.AEDAchievements(dataObj, GetUserProfile());

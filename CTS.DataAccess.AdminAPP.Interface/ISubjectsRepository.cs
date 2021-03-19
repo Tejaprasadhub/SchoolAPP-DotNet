@@ -9,6 +9,6 @@ namespace CTS.DataAccess.AdminAPP.Interface
     public interface ISubjectsRepository
     {
         DataSet GetSubjects(GridParameters pagingParameters);
-        bool AEDSubjects(CrudModel input, int userid);
+        bool AEDSubjects(CrudModel input, UserProfile userProfile);
     }
 }

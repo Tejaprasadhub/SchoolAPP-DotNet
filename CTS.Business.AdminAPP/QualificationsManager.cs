@@ -46,12 +46,12 @@ namespace CTS.Business.AdminAPP
 
             return returnObj;
         }
-        public bool AEDQualifications(CrudModel dataObj, int userid)
+        public bool AEDQualifications(CrudModel dataObj, UserProfile userProfile)
         {
             bool status = false;
             try
             {
-                status = _qualificationsRepository.AEDQualifications(dataObj, userid);
+                status = _qualificationsRepository.AEDQualifications(dataObj, userProfile);
 
             }
             catch (Exception ex)
